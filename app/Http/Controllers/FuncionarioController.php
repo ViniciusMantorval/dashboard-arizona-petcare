@@ -31,9 +31,19 @@ class FuncionarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $dados = $request->validate([
+        'nm_funcionario' => 'required|string|max:255',
+        'nm_email_funcionario' => 'required|email|max:255|unique:funcionario,nm_email_funcionario',
+        'cd_cpf_funcionario' => 'required|digits:11|unique:funcionario,cd_cpf_funcionario',
+        'cd_telefone_funcionario' => 'required|digits:11',
+        'nm_especialidade_funcionario' => 'required|string|max:255',
+    ]);
+
+    Funcionario::create($dados);
+
+    return redirect()->route('funcionarios.index')
+        ->with('success', 'Funcionário cadastrado com sucesso!');
     }
 
     /**
