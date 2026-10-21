@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id_tutor');
             $table->string('nm_tutor');
             $table->string('nm_endereco_tutor');
+            $table->string('nm_email_tutor');
             $table->char('cd_telefone_cliente',11);
             $table->char('cd_cpf_cliente',11);
             $table->timestamps();

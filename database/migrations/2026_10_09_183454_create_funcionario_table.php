@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('funcionario', function (Blueprint $table) {
             $table->id('id_funcionario');
             $table->string('nm_funcionario');
+            $table->string('nm_email_funcionario');
             $table->char('cd_cpf_funcionario',11);
             $table->char('cd_telefone_funcionario',11);
             $table->string('nm_especialidade_funcionario');
