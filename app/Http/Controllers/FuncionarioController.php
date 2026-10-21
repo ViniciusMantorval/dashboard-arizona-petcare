@@ -12,7 +12,12 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        //
+        $funcionarios = Funcionario::all();
+
+        return view('funcionarios.index', [
+            'funcionarios' => $funcionarios,
+            'title' => 'Funcionarios',
+        ]);
     }
 
     /**
@@ -20,7 +25,7 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('funcionarios.create');
     }
 
     /**
