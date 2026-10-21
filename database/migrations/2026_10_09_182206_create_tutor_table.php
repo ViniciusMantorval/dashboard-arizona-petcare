@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('nm_tutor');
             $table->string('nm_endereco_tutor');
             $table->string('nm_email_tutor');
-            $table->char('cd_telefone_cliente',11);
-            $table->char('cd_cpf_cliente',11);
+            $table->char('cd_telefone_tutor',11);
+            $table->char('cd_cpf_tutor',11);
             $table->timestamps();
         });
     }
