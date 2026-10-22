@@ -30,7 +30,7 @@
 
 <p>
     <label for="cd_cpf_funcionario">CPF</label>
-    <input type="text" name="cd_cpf_funcionario" id="cd_cpf_funcionario" value="{{ old('nm_funcionario') }}">
+    <input type="text" name="cd_cpf_funcionario" id="cd_cpf_funcionario" value="{{ old('cd_cpf_funcionario') }}">
 </p>
 
 <p>
@@ -39,7 +39,7 @@
 </p>
 <p>
     <label for="nm_especialidade_funcionario">Especialidade</label>
-    <input type="text" name="nm_especialidade_funcionario" id="nm_especialidade_funcionario" value="{{ old('cd_telefone_funcionario') }}">
+    <input type="text" name="nm_especialidade_funcionario" id="nm_especialidade_funcionario" value="{{ old('nm_especialidade_funcionario') }}">
 </p>
 
 <button type="submit">Enviar</button>
