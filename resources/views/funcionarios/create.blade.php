@@ -13,7 +13,7 @@
 </ul>
 @endif
 
-<form action="{{ route('funcionarios.store') }}" method="POST">
+<form action="{{ route('funcionario.store') }}" method="POST">
 @csrf
 
 

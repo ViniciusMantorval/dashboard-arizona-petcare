@@ -12,11 +12,11 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionarios = Funcionario::all();
+        $funcionario = Funcionario::all();
 
         return view('funcionarios.index', [
-            'funcionarios' => $funcionarios,
-            'title' => 'Funcionarios',
+            'funcionarios' => $funcionario,
+            'title' => 'Funcionario',
         ]);
     }
 
@@ -57,9 +57,11 @@ class FuncionarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Funcionario $funcionario)
+    public function edit(string $id)
     {
-        //
+        $funcionario = Funcionario::findOrFail($id);
+        return view('funcionarios.edit', [
+            'funcionario' => $funcionario]);
     }
 
     /**

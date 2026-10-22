@@ -12,7 +12,7 @@
 
     <main>
         @if (session('success'))
-            <p style="color: green;">{{ session('success') }}</p>
+            <p class="text-green">{{ session('success') }}</p>
         @endif
 
         @yield('conteudo')
