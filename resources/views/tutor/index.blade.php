@@ -6,6 +6,19 @@
     <title>Tutores</title>
 </head>
 <body>
+    <div>
+        @foreach ($tutores as $tutor)
+            <div>
+                <p>{{ $tutor->nm_tutor }}</p>
+                <p>{{ $tutor->nm_email_tutor }}</p>
+                <p>{{ $tutor->nm_endereco_tutor }}</p>
+                <p>{{ $tutor->cd_telefone_tutor }}</p>
+                <p>{{ $tutor->cd_cpf_tutor }}</p>
+                <a href="{{ route('tutores.edit',$tutor->id_tutor) }}">Editar</a>
+            </div>
+            <br>
+        @endforeach
+    </div>
     <a href="{{ route('tutores.create') }}">adicionar um tutor</a>
 </body>
 </html>
