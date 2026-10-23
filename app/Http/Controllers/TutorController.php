@@ -47,7 +47,11 @@ class TutorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $tutor = Tutor::findOrFail($id);
+
+        return view('tutor.show',[
+                "tutor"=> $tutor,
+            ]);
     }
 
     /**

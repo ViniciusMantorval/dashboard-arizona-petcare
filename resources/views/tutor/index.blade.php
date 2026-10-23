@@ -9,7 +9,7 @@
     <div>
         @foreach ($tutores as $tutor)
             <div>
-                <p>{{ $tutor->nm_tutor }}</p>
+                <a href="{{ route("tutores.show",$tutor->id_tutor) }}">{{ $tutor->nm_tutor }}</a>
                 <p>{{ $tutor->nm_email_tutor }}</p>
                 <p>{{ $tutor->nm_endereco_tutor }}</p>
                 <p>{{ $tutor->cd_telefone_tutor }}</p>
