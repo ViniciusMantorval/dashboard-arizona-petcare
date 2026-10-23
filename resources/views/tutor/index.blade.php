@@ -15,6 +15,11 @@
                 <p>{{ $tutor->cd_telefone_tutor }}</p>
                 <p>{{ $tutor->cd_cpf_tutor }}</p>
                 <a href="{{ route('tutores.edit',$tutor->id_tutor) }}">Editar</a>
+                <form method="post" action="{{ route('tutores.destroy',$tutor->id_tutor) }}">
+                    @csrf
+                    @method("DELETE")
+                    <button type="submit">Remover</button>
+                </form>
             </div>
             <br>
         @endforeach
