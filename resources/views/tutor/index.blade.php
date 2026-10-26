@@ -14,6 +14,7 @@
                 <p>{{ $tutor->nm_endereco_tutor }}</p>
                 <p>{{ $tutor->cd_telefone_tutor }}</p>
                 <p>{{ $tutor->cd_cpf_tutor }}</p>
+                <a href="{{ route('tutores.pets.create',$tutor) }}">Adicionar Pet</a>
                 <a href="{{ route('tutores.edit',$tutor->id_tutor) }}">Editar</a>
                 <form method="post" action="{{ route('tutores.destroy',$tutor->id_tutor) }}">
                     @csrf
