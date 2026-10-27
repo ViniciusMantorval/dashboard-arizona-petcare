@@ -5,16 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Pet;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PetController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $id)
     {
-        $pets = Pet::all();
-        return view('pet.index');
+        $pets = DB::table('pet')
+            ->where('id_tutor', '=', $id)
+            ->get();
+
+        return view('pet.index',['pets'=>$pets]);
     }
 
     /**
