@@ -58,15 +58,15 @@ class PetController extends Controller
      */
     public function show(Pet $pet)
     {
-        //
-    }
+        return view('pet.show',["pet"=>$pet]);
+    }   
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Pet $pet)
     {
-        //
+        return view('pet.edit',["pet"=>$pet]);
     }
 
     /**
@@ -74,7 +74,14 @@ class PetController extends Controller
      */
     public function update(Request $request, Pet $pet)
     {
-        //
+        $pet->nm_pet = $request->input('nome');
+        $pet->nm_especie_pet = $request->input('especie');
+        $pet->nm_raca_pet = $request->input('raca');
+        $pet->qt_peso_pet = $request->input('peso');
+
+        $pet->save();
+
+        return redirect(route("pets.show",$pet));
     }
 
     /**
@@ -82,6 +89,8 @@ class PetController extends Controller
      */
     public function destroy(Pet $pet)
     {
-        //
+        $pet->delete();
+
+        return redirect("/tutores");
     }
 }
