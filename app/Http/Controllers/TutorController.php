@@ -88,7 +88,8 @@ class TutorController extends Controller
      */
     public function destroy(string $id)
     {
-        Tutor::destroy($id);
+        $tutor = Tutor::find($id);
+        $tutor->delete();
 
         return redirect("/tutores");
     }
