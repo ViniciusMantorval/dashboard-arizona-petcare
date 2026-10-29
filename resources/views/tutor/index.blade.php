@@ -16,6 +16,15 @@
                     <p>{{ $tutor->nm_endereco_tutor }}</p>
                     <p>{{ $tutor->cd_telefone_tutor }}</p>
                     <p>{{ $tutor->cd_cpf_tutor }}</p>
+                    
+                    @if ($tutor->pet->isNotEmpty())
+                        <div class="h-9"></div>
+                        @foreach ($tutor->pet as $pet)
+                            <p>{{ $pet->nm_pet }}</p>
+                        @endforeach
+                    @endif
+
+
                 </div>
 
                 <div class="flex gap-1">

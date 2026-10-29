@@ -13,8 +13,9 @@ class TutorController extends Controller
      */
     public function index()
     {
+        $tutores = Tutor::with('pet')->get();
 
-        return view('tutor.index',["tutores"=>Tutor::all()]);
+        return view('tutor.index',["tutores"=>$tutores]);
     }
 
     /**

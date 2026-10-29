@@ -11,4 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tutor extends Model
 {
     //
+    public function pet(){
+        return $this->hasMany(Pet::class,'id_tutor');
+    }
 }

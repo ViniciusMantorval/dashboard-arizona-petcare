@@ -12,11 +12,12 @@ class PetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(string $id)
+    public function index(Tutor $tutor)
     {
-        $pets = DB::table('pet')
-            ->where('id_tutor', '=', $id)
-            ->get();
+        // $pets = DB::table('pet')
+        //     ->where('id_tutor', '=', $id)
+        //     ->get();
+        $pets = Pet::whereBelongsTo($tutor)->get();
 
         return view('pet.index',['pets'=>$pets]);
     }
@@ -50,7 +51,7 @@ class PetController extends Controller
 
         $pet->save();
 
-        return redirect(route('tutores.pets.index',$tutor->id_tutor));
+        return redirect(route('tutores.pets.index',$tutor));
     }
 
     /**
