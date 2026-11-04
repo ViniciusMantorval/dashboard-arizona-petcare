@@ -11,11 +11,31 @@ class TutorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tutores = Tutor::with('pet')->get();
+        // $tutores = Tutor::with('pet')->get();
 
-        return view('tutor.index',["tutores"=>$tutores]);
+
+        // return view('tutor.index',["tutores"=>$tutores]);
+        $filtros = $request->only(['nome', 'cpf', 'email', 'pet']);
+
+        $tutores = Tutor::query()
+            ->with('pet')
+            ->when($filtros['nome'] ?? null, fn ($q, $v) => $q->whereLike('nm_tutor', "%{$v}%"))
+            ->when($filtros['cpf'] ?? null, function ($q, $v) {
+                $cpf = preg_replace('/\D/', '', $v);
+                $q->whereLike('cd_cpf_tutor', "%{$cpf}%");
+            })
+            ->when($filtros['email'] ?? null, fn ($q, $v) => $q->whereLike('nm_email_tutor', "%{$v}%"))
+            ->when($filtros['pet'] ?? null, fn ($q, $v) =>
+                $q->whereHas('pet', fn ($q) => $q->whereLike('nm_pet', "%{$v}%")))
+            ->orderBy('nm_tutor')->get();
+
+        if ($request->ajax()) {
+            return view('tutor._lista', ['tutores'=>$tutores]);   // resposta "leve"
+        }
+
+        return view('tutor.index',["tutores"=>$tutores, "filtros"=>$filtros]);
     }
 
     /**

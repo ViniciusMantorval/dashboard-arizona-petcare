@@ -7,40 +7,19 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <div>
-        @foreach ($tutores as $tutor)
-            <div class="flex justify-between items-center bg-purple-300 rounded-2xl p-4">
-                <div>
-                    <h1 href="{{ route("tutores.show",$tutor->id_tutor) }}">{{ $tutor->nm_tutor }}</h1>
-                    <p>{{ $tutor->nm_email_tutor }}</p>
-                    <p>{{ $tutor->nm_endereco_tutor }}</p>
-                    <p>{{ $tutor->cd_telefone_tutor }}</p>
-                    <p>{{ $tutor->cd_cpf_tutor }}</p>
-                    
-                    @if ($tutor->pet->isNotEmpty())
-                        <div class="h-9"></div>
-                        @foreach ($tutor->pet as $pet)
-                            <p>{{ $pet->nm_pet }}</p>
-                        @endforeach
-                    @endif
-
-
-                </div>
-
-                <div class="flex gap-1">
-                    <a href="{{ route('tutores.pets.create',$tutor) }}">Adicionar Pet</a>
-                    <a href="{{ route('tutores.pets.index',$tutor) }}">Listar Pets</a>
-
-                    <a href="{{ route('tutores.edit',$tutor->id_tutor) }}">Editar</a>
-                    <form method="post" action="{{ route('tutores.destroy',$tutor->id_tutor) }}">
-                        @csrf
-                        @method("DELETE")
-                        <button type="submit">Remover</button>
-                    </form>
-                </div>
-            </div>
-            <br>
-        @endforeach
+    <form id="filtro-tutores" method="GET" action="{{ route('tutores.index') }}" class="flex flex-wrap gap-2 p-4 bg-purple-100 rounded-2xl mb-4" autocomplete="off">
+        <input type="text" name="nome" value="{{ request('nome') }}" placeholder="Nome do tutor">
+        <input type="text" name="cpf" value="{{ request('cpf') }}" placeholder="CPF">
+        <input type="text" name="email" value="{{ request('email') }}" placeholder="E-mail">
+        <input type="text" name="pet" value="{{ request('pet') }}" placeholder="Nome do pet">
+        <button type="button" id="limpar-filtro">Limpar</button>
+    </form>
+    <div id="lista-tutores">
+    @if(isset($tutores))
+    @include('tutor._lista')
+    @else
+    <h1>Erro, sem nenhum tutor</h1>
+    @endif
     </div>
     <a href="{{ route('tutores.create') }}">adicionar um tutor</a>
 </body>
