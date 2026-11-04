@@ -3,32 +3,55 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pet;
+use App\Models\Tutor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PetController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Tutor $tutor)
     {
-        //
+        // $pets = DB::table('pet')
+        //     ->where('id_tutor', '=', $id)
+        //     ->get();
+        $pets = Pet::whereBelongsTo($tutor)->get();
+
+        return view('pet.index',['pets'=>$pets]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Tutor $tutor)
     {
-        //
-    }
+        if($tutor == null){
+            return "Vazio";
+        }
+        // return $tutor->nm_tutor;
+
+        return view('pet.create',['tutore'=>$tutor]);
+    }   
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Tutor $tutor)
     {
-        //
+        $pet = new Pet();
+
+        $pet->nm_pet = $request->input('nome');
+        $pet->nm_especie_pet = $request->input('especie');
+        $pet->nm_raca_pet = $request->input('raca');
+        $pet->qt_peso_pet = $request->input('peso');
+
+        $pet->id_tutor = $tutor->id_tutor;
+
+        $pet->save();
+
+        return redirect(route('tutores.pets.index',$tutor));
     }
 
     /**
@@ -36,15 +59,15 @@ class PetController extends Controller
      */
     public function show(Pet $pet)
     {
-        //
-    }
+        return view('pet.show',["pet"=>$pet]);
+    }   
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Pet $pet)
     {
-        //
+        return view('pet.edit',["pet"=>$pet]);
     }
 
     /**
@@ -52,7 +75,14 @@ class PetController extends Controller
      */
     public function update(Request $request, Pet $pet)
     {
-        //
+        $pet->nm_pet = $request->input('nome');
+        $pet->nm_especie_pet = $request->input('especie');
+        $pet->nm_raca_pet = $request->input('raca');
+        $pet->qt_peso_pet = $request->input('peso');
+
+        $pet->save();
+
+        return redirect(route("pets.show",$pet));
     }
 
     /**
@@ -60,6 +90,8 @@ class PetController extends Controller
      */
     public function destroy(Pet $pet)
     {
-        //
+        $pet->delete();
+
+        return redirect("/tutores");
     }
 }
