@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+ public function up(): void
+{
+    Schema::table('funcionario', function (Blueprint $table) {
+        $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+        $table->foreignId('clinica_id')->nullable()->constrained('clinicas')->nullOnDelete();
+        $table->timestamps();
+    });
+}
+
+public function down(): void
+{
+    Schema::table('funcionario', function (Blueprint $table) {
+        $table->dropConstrainedForeignId('user_id');
+        $table->dropConstrainedForeignId('clinica_id');
+        $table->dropTimestamps();
+    });
+}
+};

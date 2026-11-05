@@ -13,13 +13,14 @@ return new class extends Migration
     {
         
         Schema::create('pet', function (Blueprint $table) {
-            $table->id('id_pet');
-            $table->string('nm_pet');
-            $table->string('nm_especie_pet');
-            $table->string('nm_raca_pet');
-            $table->float('qt_peso_pet');
-            $table->foreignId('id_tutor')->constrained('tutor','id_tutor','id_tutor_fk');
-            $table->timestamps();
+            $table->integer('id_pet')->autoIncrement();
+            $table->string('nm_pet', 50)->nullable();
+            $table->string('nm_especie_pet', 50)->nullable();
+            $table->string('nm_raca_pet', 50)->nullable();
+            $table->decimal('qt_peso_pet', 5, 2)->nullable();
+            $table->integer('tutor_fk');
+            $table->primary('id_pet');
+            $table->foreign('tutor_fk')->references('id_tutor')->on('tutor');
         });
     }
 
