@@ -68,7 +68,7 @@ class AuthService
             } else {
 
                 $user->clinicas()->create([
-                    'nome' => $data['nome_clinica']
+                    'nm_clinica' => $data['nome_clinica']
                 ]);
 
             }

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('conteudo')
-<p class="eyebrow">Painel do dono de clínica</p><h1>Olá, {{ auth()->user()->name }}.</h1>
-<p>Gerencie as clínicas pelas quais você é responsável.</p>
-<div class="cards"><section class="card"><h2>Minhas clínicas</h2>
-@forelse($clinicas as $clinica)
-<article class="clinic"><h3>{{ $clinica->nome }}</h3><p>Responsável: {{ auth()->user()->name }}</p><small>{{ $clinica->funcionarios_count }} funcionário(s) vinculado(s)</small></article>
-@empty<p>Você ainda não tem clínicas cadastradas.</p>@endforelse
-</section>
-<section class="card"><h2>Adicionar clínica</h2><form class="stack" action="{{ route('clinicas.store') }}" method="POST">@csrf
-<label for="nome">Nome da clínica</label><input id="nome" name="nome" value="{{ old('nome') }}" required maxlength="255">
-<button type="submit">Cadastrar clínica</button></form></section></div>
+<p class="eyebrow">Painel do funcionário</p><h1>Olá, {{ auth()->user()->name }}.</h1>
+<div class="cards"><section class="card"><h2>Seu perfil profissional</h2><dl>
+<dt>E-mail</dt><dd>{{ auth()->user()->email }}</dd>
+<dt>CRMV</dt><dd>{{ $funcionario->crmv }}</dd>
+<dt>Especialidade</dt><dd>{{ $funcionario->nm_especialidade_funcionario }}</dd>
+</dl></section>
+<section class="card"><h2>Sua clínica</h2>
+@if($funcionario->clinica)<p>{{ $funcionario->clinica->nome }}</p>
+@else<p>Você ainda não está vinculado a uma clínica.</p><p class="hint">Sua conta está ativa e você pode acessar este painel normalmente.</p>@endif
+</section></div>
 @endsection

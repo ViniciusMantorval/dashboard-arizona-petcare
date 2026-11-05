@@ -1,4 +1,4 @@
-@extends('layout.php')
+@extends('layouts.app')
 @section('conteudo')
 <section class="panel"><p class="eyebrow">{{ $perfil === 'dono' ? 'Área do dono' : 'Área do funcionário' }}</p>
 <h1>Entrar na sua conta</h1>
