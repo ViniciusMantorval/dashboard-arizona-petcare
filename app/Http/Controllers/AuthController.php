@@ -25,7 +25,7 @@ class AuthController extends Controller
     public function registerForm(string $perfil): View
     {
         $clinicas = $perfil === 'funcionario'
-            ? Clinica::orderBy('nm_clinica')->get()
+            ? Clinica::orderBy('nome')->get()
             : collect();
 
         return view('auth.register', compact('perfil', 'clinicas'));

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Table('clinicas', 'id_clinica')]
+#[Table('clinicas', 'id')]
 #[Fillable(['nome'])]
 class Clinica extends Model
 {

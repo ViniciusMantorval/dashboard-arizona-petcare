@@ -9,11 +9,7 @@ use App\Http\Controllers\TutorController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('perfil', 'funcionario|dono');
-Route::get('/', function () {
-    return auth()->check()
-        ? redirect()->route('dashboard')
-        : redirect()->route('login');
-})->name('home');
+Route::view('/', 'home')->name('home');
 Route::middleware('guest')->group(function () {
     Route::view('/login', 'auth.choose')->name('login');
     Route::get('/login/{perfil}', [AuthController::class, 'loginForm'])->name('login.perfil');
