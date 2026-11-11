@@ -8,12 +8,10 @@ use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request): RedirectResponse
-    {
-        abort_unless(in_array($request->user()->perfil, ['dono', 'funcionario'], true), 403);
-
-        return redirect()->route('dashboard.'.$request->user()->perfil);
-    }
+   public function index(Request $request): RedirectResponse
+{
+    return redirect()->route('dashboard.'.$request->user()->perfil);
+}
 
     public function dono(Request $request): View
     {

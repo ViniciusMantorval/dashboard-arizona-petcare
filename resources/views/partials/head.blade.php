@@ -1,5 +1,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('titulo', 'Arizona Pet Care') · Arizona Pet Care</title>
+<meta name="theme-color" content="#633927">
+<title>@yield('titulo', 'Painel') | Painel Arizona Pet Care</title>
+<link rel="icon" type="image/png" href="{{ asset('assets/img/logo.png') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/petcare.css') }}">

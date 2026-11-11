@@ -3,8 +3,7 @@
 <head>
     @include('partials.head')
 </head>
-<body class="app">
-    
+
 <body class="app">
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 <div class="fundo-menu" data-menu-fechar></div>

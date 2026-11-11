@@ -4,18 +4,26 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\TutorController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('perfil', 'funcionario|dono');
-Route::view('/', 'home')->name('home');
+
+Route::get('/', fn () => redirect()->route(auth()->check() ? 'dashboard' : 'login'))->name('home');
+
 Route::middleware('guest')->group(function () {
-    Route::view('/login', 'auth.choose')->name('login');
-    Route::get('/login/{perfil}', [AuthController::class, 'loginForm'])->name('login.perfil');
-    Route::post('/login/{perfil}', [AuthController::class, 'login'])->name('login.store');
+    Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:10,1')->name('login.store');
+
     Route::get('/cadastro/{perfil}', [AuthController::class, 'registerForm'])->name('register');
     Route::post('/cadastro/{perfil}', [AuthController::class, 'register'])->middleware('throttle:10,1')->name('register.store');
+
+    Route::view('/recuperar-senha', 'auth.recuperar-senha')->name('password.request');
+    Route::post('/recuperar-senha', [PasswordResetController::class, 'enviarLink'])->middleware('throttle:5,1')->name('password.email');
+    Route::get('/redefinir-senha/{token}', [PasswordResetController::class, 'formulario'])->name('password.reset');
+    Route::post('/redefinir-senha', [PasswordResetController::class, 'atualizar'])->name('password.update');
 });
 
 Route::middleware('auth')->group(function () {
