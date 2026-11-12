@@ -1,0 +1,49 @@
+Esse projeto Laravel está pronto e funcionando. No entanto, faltaram algumas documentações. Notávelmente:
+
+- Requisitos não funcionais mais definidos
+- Casos de uso
+- Diagrama de Classes
+
+
+Já temos Requisitos Funcionais (requisitos_funcionais.md). .Os requisitos não funcionais estão como lista, mas deveriam ser testaveis de forma quantitativa e/ou qualitativa.
+
+# Orientações Casos de Uso (casos_de_uso.md)
+
+Os casos de uso devem ser descritos com o seguinte formato:
+```markdown
+- Nome: ...
+- Ator: ...
+- Pré-condições: ...
+- Pós-condições: ...
+- Breve descritivo: ...
+- Cenário principal:
+    - 1. Ator: ...
+    - 2. Sistema: ...
+    - 3. Ator: ...
+    - 4. Sistema: ...
+- Cenário alternativo:
+    - _obs: número se refere a uma etapa do cenário principal. Letra se refere a um cenário (o cenário alternativo A, a etapa 1 foi diferente e consequentemente a etapa 2 também foi. A etapa 3 foi igual mas a etapa 4 mudou)
+    - 1a. ...
+    - 2a. ...
+    - 4a. ...
+    - 1b. ...
+- Restrições/Validações: ...
+- Dados relacionados: ...
+```
+
+# Orientações diagramas de classes 
+
+Diagrama de Classes eu gostaria que fosse focado na infraestrutura de controller e model do Laravel. Nada demais. Faz usando a skill do excalidraw e avise o desenvolvedor se ela estiver indisponível
+
+# Telas do sistema (telas.md)
+
+Também será necessário tirar fotos do sistema já funcionando. Para isso, faça uma lista ordenada mostrando a legenda que será incluida e uma breve explicação de como chegar na tela referenciada. Exemplo:
+```markdown
+#### 1. Tela de login
+{Placeholder Imagem}
+Acesse /login e tire foto
+
+#### 2. Tela Home
+{Placeholder imagem}
+Já logado, acesse /
+```
