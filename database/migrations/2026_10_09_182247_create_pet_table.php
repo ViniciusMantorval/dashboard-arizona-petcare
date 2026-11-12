@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
         Schema::create('pet', function (Blueprint $table) {
             $table->integer('id_pet')->autoIncrement();
-            $table->string('nm_pet', 50)->nullable();
-            $table->string('nm_especie_pet', 50)->nullable();
+
+            $table->string('nm_pet', 50);
+            $table->string('nm_especie_pet', 50);
             $table->string('nm_raca_pet', 50)->nullable();
             $table->decimal('qt_peso_pet', 5, 2)->nullable();
-            $table->integer('tutor_fk');
-            $table->primary('id_pet');
-            $table->foreign('tutor_fk')->references('id_tutor')->on('tutor');
+            $table->integer('id_tutor');
+            $table->boolean('ic_ativo_pet')->default(true);
+
+            $table->timestamps();
+
+            $table->foreign('id_tutor')->references('id_tutor')->on('tutor')->cascadeOnDelete();
         });
     }
 

@@ -12,14 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tutor', function (Blueprint $table) {
-        $table->integer('id_tutor')->autoIncrement();
+            $table->integer('id_tutor')->autoIncrement();
 
-        $table->string('nm_cliente', 50)->nullable();
-        $table->string('nm_endereco_cliente', 50)->nullable();
-        $table->char('cd_telefone_cliente', 11)->nullable();
-        $table->char('cd_cpf_tutor', 11);
+            $table->string('nm_tutor', 100);
+            $table->string('nm_endereco_tutor', 150)->nullable();
+            $table->string('nm_email_tutor', 120)->nullable();
+            $table->char('cd_telefone_tutor', 11)->nullable();
+            $table->char('cd_cpf_tutor', 11)->nullable();
+            $table->boolean('ic_ativo_tutor')->default(true);
 
-        $table->primary('id_tutor');
+            $table->timestamps();
         });
     }
 

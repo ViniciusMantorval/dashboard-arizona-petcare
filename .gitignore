@@ -18,6 +18,9 @@
 /public/fonts-manifest.dev.json
 /public/hot
 /public/storage
+/public/uploads/exames/*
+!/public/uploads/exames/.gitkeep
+!/public/uploads/exames/exame-exemplo.pdf
 /storage/*.key
 /storage/pail
 /vendor

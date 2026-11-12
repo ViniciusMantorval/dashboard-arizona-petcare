@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthService
 {
-    public function login(array $credentials, string $perfil, Request $request): void
+    public function login(array $credentials, Request $request): void
     {
         $email = Str::lower(trim($credentials['email']));
 
@@ -27,12 +27,11 @@ class AuthService
         if (!Auth::attempt([
             'email' => $email,
             'password' => $credentials['password'],
-            'perfil' => $perfil
         ])) {
             RateLimiter::hit($key, 60);
 
             throw ValidationException::withMessages([
-                'email' => 'E-mail ou senha inválidos para este perfil.'
+                'email' => 'E-mail ou senha inválidos.'
             ]);
         }
 
