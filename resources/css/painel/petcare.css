@@ -41,9 +41,9 @@
 .kpi p { gap: .35rem; }
 .kpi strong { font-size: 2.2rem; }
 .kpi p > span { font-size: .8rem; }
-.kpi:nth-child(3)::after { content: ''; position: absolute; width: 37px; height: 37px; top: 20px; right: 15px; background: url('../img/pets/paw.svg') center/contain no-repeat; opacity: .35; transform: rotate(20deg); pointer-events: none; }
+.kpi:nth-child(3)::after { content: ''; position: absolute; width: 37px; height: 37px; top: 20px; right: 15px; background: url('/assets/img/pets/paw.svg') center/contain no-repeat; opacity: .35; transform: rotate(20deg); pointer-events: none; }
 .vazio { padding: 1.6rem 1rem 2rem; font-size: .88rem; }
-.vazio::before { content: ''; display: block; width: 76px; height: 57px; margin: 0 auto .8rem; background: url('../img/pets/cat.svg') center/contain no-repeat; opacity: .75; }
+.vazio::before { content: ''; display: block; width: 76px; height: 57px; margin: 0 auto .8rem; background: url('/assets/img/pets/cat.svg') center/contain no-repeat; opacity: .75; }
 th { background: var(--sand); font-size: .76rem; }
 .filtros { background: #fff; border-radius: 10px 24px 24px 24px; }
 input, select, textarea { background-color: #fff; border-radius: 10px; }

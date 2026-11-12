@@ -1,7 +1,7 @@
 /* Painel Arizona Pet Care — extensão visual do site: mesma paleta, tipografia e formas. */
 
-@font-face { font-family: "Outfit"; src: url("../fonts/outfit-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: "Nunito Sans"; src: url("../fonts/nunito-sans-var.woff2") format("woff2"); font-weight: 200 1000; font-style: normal; font-display: swap; }
+@font-face { font-family: "Outfit"; src: url("/assets/fonts/outfit-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nunito Sans"; src: url("/assets/fonts/nunito-sans-var.woff2") format("woff2"); font-weight: 200 1000; font-style: normal; font-display: swap; }
 
 :root {
   --brand: #633927; --brand-deep: #3d2316; --ochre: #c4973f; --ochre-soft: #e3c47f; --sand: #f5f0e8;
@@ -173,7 +173,7 @@ dialog p { font-size: 1.05rem; font-weight: 600; }
 
 /* Login e recuperação de senha */
 .auth-grid { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 100vh; }
-.auth-marca { display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; padding: 3rem; color: #fff; background: linear-gradient(rgba(61, 35, 22, .84), rgba(61, 35, 22, .93)), url("../img/fachada.png") center / cover; }
+.auth-marca { display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; padding: 3rem; color: #fff; background: linear-gradient(rgba(61, 35, 22, .84), rgba(61, 35, 22, .93)), url("/assets/img/fachada.png") center / cover; }
 .auth-marca img { width: 180px; height: auto; }
 .auth-titulo { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.15; margin: .4rem 0 1rem; max-width: 22ch; }
 .auth-marca div p:last-child { max-width: 38ch; color: rgba(255, 255, 255, .85); }

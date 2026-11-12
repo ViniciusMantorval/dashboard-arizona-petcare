@@ -4,5 +4,4 @@
 <meta name="theme-color" content="#633927">
 <title>@yield('titulo', 'Painel') | Painel Arizona Pet Care</title>
 <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.png') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/petcare.css') }}">
+@vite(['resources/css/app.css', 'resources/js/app.js'])

@@ -4,7 +4,7 @@ Aprovado em 11/11/2026. Especificação em `context/SPEC.md`.
 
 ## Status
 
-- [ ] M1 — Assets via Vite
+- [x] M1 — Assets via Vite
 - [ ] M2 — Banco, models, seeder e login
 - [ ] M3 — Controllers e rotas
 - [ ] M4 — Views Blade

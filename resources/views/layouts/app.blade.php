@@ -87,6 +87,5 @@
   </form>
 </dialog>
 
-<script src="{{ asset('assets/js/app.js') }}" defer></script>
 </body>
 </html>
