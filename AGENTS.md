@@ -1,9 +1,16 @@
-<laravel-boost-guidelines>
 # Laravel Application
 
-This repository contains a Laravel application. Complete the following setup before working on the user's request.
+This repository contains a Laravel application. PHP and Composer may be run
+through the development containers in `docker/` or through a native PHP install.
+Ask the developer which workflow they use. For Docker, see `docker/README.md`.
 
-## Prerequisites
+Laravel Boost is a development dependency. Before making application changes,
+install the project dependencies and run `php artisan boost:install` in the
+developer's chosen environment, after reviewing its effects. Read the resulting
+guidance before continuing. For Docker, run PHP and Composer commands in the
+app container; for native PHP, run them on the host.
+
+## Prerequisites for the native PHP environment
 
 Verify that PHP and Composer are available:
 
@@ -33,15 +40,3 @@ Linux:
 ```
 
 After installation, ask the user to restart their terminal. If the agent needs the restarted shell to continue, ask the user to reopen their terminal and rerun their original prompt.
-
-## Agent Setup
-
-Install Laravel Boost from the application root before making application changes:
-
-```sh
-composer require laravel/boost --dev
-php artisan boost:install
-```
-
-Boost replaces these bootstrap instructions with guidelines tailored to the application. After installation, read `AGENTS.md` again and continue with the user's original request using the generated guidelines.
-</laravel-boost-guidelines>
