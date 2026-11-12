@@ -6,7 +6,7 @@ Aprovado em 11/11/2026. Especificação em `context/SPEC.md`.
 
 - [x] M1 — Assets via Vite
 - [x] M2 — Banco, models, seeder e login
-- [ ] M3 — Controllers e rotas
+- [x] M3 — Controllers e rotas
 - [ ] M4 — Views Blade
 - [ ] M5 — Remoção das views legadas e documentação
 

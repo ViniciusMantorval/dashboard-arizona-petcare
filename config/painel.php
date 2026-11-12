@@ -10,6 +10,9 @@ return [
     'menu' => [
         ['dashboard',          'Painel',       'painel',       'Operação',      ['dono', 'funcionario']],
         ['tutores.index',      'Clientes',     'clientes',     'Operação',      ['dono', 'funcionario']],
+        ['pets.index',         'Pets',         'pet',          'Operação',      ['dono', 'funcionario']],
+        ['consultas.index',    'Consultas',    'calendario',   'Operação',      ['dono', 'funcionario']],
+        ['exames.index',       'Exames',       'exames',       'Operação',      ['dono', 'funcionario']],
         ['funcionarios.index', 'Funcionários', 'funcionarios', 'Administração', ['dono']],
     ],
 

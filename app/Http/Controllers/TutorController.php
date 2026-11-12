@@ -2,46 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\ValidaComMensagens;
 use App\Models\Tutor;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Monolog\Logger;
+use Illuminate\View\View;
 
 class TutorController extends Controller
 {
+    use ValidaComMensagens;
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
-        // $tutores = Tutor::with('pet')->get();
-
-
-        // return view('tutor.index',["tutores"=>$tutores]);
         $filtros = $request->only(['nome', 'cpf', 'email', 'pet']);
 
         $tutores = Tutor::query()
-            ->with('pet')
-            ->when($filtros['nome'] ?? null, fn ($q, $v) => $q->whereLike('nm_tutor', "%{$v}%"))
-            ->when($filtros['cpf'] ?? null, function ($q, $v) {
-                $cpf = preg_replace('/\D/', '', $v);
-                $q->whereLike('cd_cpf_tutor', "%{$cpf}%");
+            ->with('pets')
+            ->when($filtros['nome'] ?? null, fn ($query, $valor) => $query->whereLike('nm_tutor', "%{$valor}%"))
+            ->when($filtros['cpf'] ?? null, function ($query, $valor) {
+                $cpf = preg_replace('/\D/', '', $valor);
+                $query->whereLike('cd_cpf_tutor', "%{$cpf}%");
             })
-            ->when($filtros['email'] ?? null, fn ($q, $v) => $q->whereLike('nm_email_tutor', "%{$v}%"))
-            ->when($filtros['pet'] ?? null, fn ($q, $v) =>
-                $q->whereHas('pet', fn ($q) => $q->whereLike('nm_pet', "%{$v}%")))
-            ->orderBy('nm_tutor')->get();
+            ->when($filtros['email'] ?? null, fn ($query, $valor) => $query->whereLike('nm_email_tutor', "%{$valor}%"))
+            ->when($filtros['pet'] ?? null, fn ($query, $valor) => $query->whereHas(
+                'pets',
+                fn ($query) => $query->whereLike('nm_pet', "%{$valor}%")
+            ))
+            ->orderBy('nm_tutor')
+            ->get();
 
         if ($request->ajax()) {
-            return view('tutor._lista', ['tutores'=>$tutores]);   // resposta "leve"
+            return view('tutor._lista', ['tutores' => $tutores]);
         }
 
-        return view('tutor.index',["tutores"=>$tutores, "filtros"=>$filtros]);
+        return view('tutor.index', ['tutores' => $tutores, 'filtros' => $filtros]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('tutor.create');
     }
@@ -49,69 +52,76 @@ class TutorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $tutor = new Tutor();
-        $tutor->nm_tutor = $request->input("nome");
-        $tutor->nm_endereco_tutor = $request->input("endereco");
-        $tutor->nm_email_tutor = $request->input("email");
-        $tutor->cd_telefone_tutor = $request->input("telefone");
-        $tutor->cd_cpf_tutor = $request->input("cpf");
+        Tutor::create($this->dados($request) + ['ic_ativo_tutor' => true]);
 
-        $tutor->save();
-
-        return redirect('/tutores');
+        return redirect()->route('tutores.index')->with('success', 'Cliente cadastrado com sucesso.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Tutor $tutor): View
     {
-        $tutor = Tutor::findOrFail($id);
+        $tutor->load(['pets' => fn ($query) => $query->orderBy('nm_pet')]);
 
-        return view('tutor.show',[
-                "tutor"=> $tutor,
-            ]);
+        return view('tutor.show', ['tutor' => $tutor]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Tutor $tutor): View
     {
-        $tutor = Tutor::find($id);
-
-        return view('tutor.edit',["tutor"=>$tutor]);
-
+        return view('tutor.edit', ['tutor' => $tutor]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Tutor $tutor): RedirectResponse
     {
-        $tutor = Tutor::find($id);
+        $tutor->update($this->dados($request));
 
-        $tutor->nm_tutor = $request->input("nome");
-        $tutor->nm_email_tutor = $request->input("email");
-        $tutor->nm_endereco_tutor = $request->input("endereco");
-        $tutor->cd_telefone_tutor = $request->input("telefone");
-        $tutor->cd_cpf_tutor = $request->input("cpf");
-
-        $tutor->save();
-
-        return redirect('/tutores');
+        return redirect()->route('tutores.show', $tutor)->with('success', 'Cliente atualizado com sucesso.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Tutor $tutor): RedirectResponse
     {
-        $tutor = Tutor::find($id);
         $tutor->delete();
 
-        return redirect("/tutores");
+        return redirect()->route('tutores.index')->with('success', 'Cliente excluído com sucesso.');
+    }
+
+    private function dados(Request $request): array
+    {
+        $dados = $request->validate([
+            'nome' => ['required', 'string', 'max:100'],
+            'email' => ['nullable', 'email', 'max:120'],
+            'endereco' => ['nullable', 'string', 'max:150'],
+            'telefone' => ['nullable', 'string', 'max:20'],
+            'cpf' => ['nullable', 'string', 'max:14'],
+        ], $this->mensagensValidacao(), $this->atributosValidacao());
+
+        return [
+            'nm_tutor' => $dados['nome'],
+            'nm_email_tutor' => $dados['email'] ?? null,
+            'nm_endereco_tutor' => $dados['endereco'] ?? null,
+            'cd_telefone_tutor' => $this->somenteDigitos($dados['telefone'] ?? null),
+            'cd_cpf_tutor' => $this->somenteDigitos($dados['cpf'] ?? null),
+        ];
+    }
+
+    private function somenteDigitos(?string $valor): ?string
+    {
+        if ($valor === null || $valor === '') {
+            return null;
+        }
+
+        return preg_replace('/\D/', '', $valor);
     }
 }

@@ -29,4 +29,13 @@ class Pet extends Model
     {
         return $this->hasMany(Consulta::class, 'PET_id_pet', 'id_pet');
     }
+
+    public function getPesoFormatadoAttribute(): string
+    {
+        if ($this->qt_peso_pet === null) {
+            return '—';
+        }
+
+        return number_format((float) $this->qt_peso_pet, 2, ',', '').' kg';
+    }
 }
