@@ -41,9 +41,27 @@ A migração substitui a decisão anterior de usar mocks nos models: os dados ag
 - CPF e telefone são armazenados apenas com dígitos; as máscaras são aplicadas no cliente.
 - Exames só podem ser anexados a consultas com status **Concluída**.
 - Arquivos de exame ficam em `public/uploads/exames`; uploads reais são ignorados pelo Git, o placeholder é versionado.
-- O visual de referência é o CSS atual de `public/assets/css` (style + petcare), preservando a ordem de aplicação.
+- O visual de referência é o CSS do painel em `resources/css/painel` (style + petcare), preservando a ordem de aplicação.
 - Não executar testes automatizados (`composer test`/Pest).
 
 ## 5. Decisões abertas
 
 Nenhuma bloqueante. Pontos registrados para etapas futuras: cadastro público, OAuth, notificações e remoção estrutural de multitenancy.
+
+## 6. Status de implementação
+
+Implementado em 12/11/2026:
+
+| # | Status | Evidência |
+|---|---|---|
+| AC1 | Atendido | `resources/css/app.css`, `resources/js/app.js` e `@vite` no partial de head; `npm run build` sem Tailwind. |
+| AC2 | Atendido | `php artisan migrate:fresh --seed` com tutor, pet, funcionario, clinicas, atendimento e exame. |
+| AC3 | Atendido | Login sem bypass com `users.perfil`; contas demo validadas (`dono` e `funcionario`). |
+| AC4 | Atendido | `TutorController` e views `tutor/*` com CRUD, filtros e detalhe. |
+| AC5 | Atendido | `PetController` e views `pet/*` com vínculo, status, exclusão e histórico. |
+| AC6 | Atendido | `FuncionarioController` cria/atualiza `User` vinculado, perfil, especialidade, status e clínica. |
+| AC7 | Atendido | `ConsultaController` e `ExameController`; upload real em `public/uploads/exames` e restrição a consultas concluídas. |
+| AC8 | Atendido | `dashboards/_painel` com KPIs, agenda do dia e exames recentes para ambos os perfis. |
+| AC9 | Atendido | As 12 views PHP legadas foram removidas; busca por `$db` e helpers antigos não encontrou referências. |
+
+Sem divergências de comportamento em relação aos critérios. A única alteração de redação foi a localização do CSS de referência, agora em `resources/css/painel`.

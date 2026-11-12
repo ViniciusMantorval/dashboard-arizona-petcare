@@ -8,7 +8,26 @@ Aprovado em 11/11/2026. Especificação em `context/SPEC.md`.
 - [x] M2 — Banco, models, seeder e login
 - [x] M3 — Controllers e rotas
 - [x] M4 — Views Blade
-- [ ] M5 — Remoção das views legadas e documentação
+- [x] M5 — Remoção das views legadas e documentação
+
+## Verificação final
+
+Executada em 12/11/2026, sem testes automatizados (decisão registrada na especificação):
+
+- `php -l` em controllers, models, rotas e configuração: sem erros.
+- `php artisan route:list --except-vendor`: 47 rotas registradas.
+- `php artisan view:clear` e `php artisan view:cache`: templates compilados sem erros.
+- `npm run build`: build concluído; CSS e JS gerados pelo Vite.
+- `php artisan migrate:fresh --seed`: esquema recriado e seed demo aplicado.
+- Smoke manual via `php artisan serve` com `dono@arizonapetcare.test` e `funcionario@arizonapetcare.test` (senha `senha12345`): login, painel, listagens, detalhes, formulários, cadastro de cliente/pet/consulta/funcionário, mudança de status, upload de exame e bloqueio 403 do perfil `funcionario` em `/funcionarios`.
+- `grep` por `$db`, helpers antigos e nomes das views legadas: nenhuma referência no código.
+- Estado demo restaurado com `migrate:fresh --seed` após o smoke.
+
+## Observações de implementação
+
+- `context/HANDOFF.md` foi mantido fora deste commit por ser um arquivo pré-existente não rastreado; o status da migração está registrado aqui, em `context/PLAN.md` e em `context/SPEC.md`.
+- Não foi criado o cadastro público (`auth.register`), conforme os não objetivos.
+- O CSS de referência foi movido de `public/assets/css` para `resources/css/painel`, preservando a ordem `style` → `petcare`.
 
 ## M1 — Assets via Vite
 
