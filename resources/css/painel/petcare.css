@@ -10,7 +10,7 @@
 .sidebar-companion { margin: auto .4rem 1rem; padding-top: 3.3rem; text-align: center; }
 .sidebar-companion img { display: block; width: 108px; height: auto; margin: 0 auto -17px; position: relative; }
 .sidebar-companion p { padding: 1.5rem .5rem .8rem; border: 1px solid #e3c47f44; border-radius: 18px 18px 30px 8px; color: var(--ochre-soft); font-size: .78rem; line-height: 1.5; }
-.sidebar-sair { margin-top: 0; }
+.sidebar-sair { margin-top: 0; width: 100%; border: none;background: var(--brand-deep);border-top: 1px solid rgba(255, 255, 255, .14);}
 .topbar { background: var(--bg); backdrop-filter: none; height: 76px; }
 .topbar-data { font-size: .85rem; }
 .avatar { background: var(--ochre-soft); border: 0; border-radius: 45% 55% 42% 58%; }
